@@ -14,7 +14,7 @@
 
 /* Propriétés principales */
 p{
-    color : rgb(100,104,109); 
+    color : rgb(100,100,100); 
 }
 body{
     font-family: 'Roboto', Arial, Verdana, sans-serif;
@@ -65,7 +65,7 @@ header
         -ms-flex-align: center;
             align-items: center;
     background-color: white;
-    position :fixed;
+   position: absolute;
     z-index:100;
  
 }
@@ -337,24 +337,23 @@ header
 
 /*----------------Partie 2 : Carte Google -------------------*/
 #section_carte{
-    padding:50px 15px;
+    padding:50px 20px;
+    padding-bottom: 20px;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-     
 }
 
 #map{
     height: 500px;
-    width:80%;
+    width:75%;
     background-color: grey;
     margin:auto;
-
 }
 
 
-.veloMarker{
+/*.veloMarker{
     width: 26px;
     height: 26px;
     margin-left: -13px;
@@ -392,36 +391,143 @@ header
     border-left:9px transparent solid;
     border-right: 9px transparent solid;
     border-top:12px black solid;
+}Pour des marqueurs personnalisés*/
+#close{
+    font-size:24px;
+    color:#a3a3a3;
+    position:absolute;
+    top:5px;
+    right:5px;
 }
-
+#close:hover{
+    color:#646464;
+}
 #panneauInfos{
     border:1px #646464 solid;
     border-radius:10px;
     background-color: #f5f5f5;
     color: rgb(100,104,109);
-    text-align: center;
-    padding-left:5px;
-    padding-right: 5px;
-    margin-left:10px;
-    line-height: 12px;
+    text-align: left;
+    padding-left:15px;
+    padding-right: 15px;
+    padding-bottom: 20px;
+    margin-left:20px;
+    line-height: 16px;
     box-shadow: 4px 4px 10px 2px rgb(100,104,109, 0.3); 
     display:none;
-
+    font-size: 14px;
+    position: relative;
+}
+#infosStations{
+  
+ 
 }
 #panneauInfos h2{
-    margin-top: 10px;
-    margin-bottom: 15px;
+    color:#5BB85D;
+    margin-top: 28px;
+    margin-bottom: 20px;
     line-height: 25px;
+    text-align: center;
+    font-size: 24px;
 }
 #panneauInfos h3{
-    color: #5BB85D;
-    font-weight: 400;
+    line-height: 12px;
+    font-weight: 600;
     margin-bottom: 0px;
+    margin-top: 0px;
 }
-#adresseStation, #nomStation{
-    line-height: 20px;
+#panneauInfos p {
+    margin-top: 5px;
 }
-@media screen and (max-width:500px){
+#reservation{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+#reservation h4{
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+#canvas{
+    border:1px #646464 solid;
+    margin-bottom: 10px;
+    background-color: white;
+}
+#boutons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 
+}
+#effacer{
+    background-color: red;
+    color:white;
+    border-radius:4px;
+    border:none;
+    font-weight: bold; 
+    text-decoration: none;
+    padding:3px 10px;
+    height: 32px;
+    margin-right: 20px;
+}
+#reserver{
+    background-color: green;
+    color:white;
+    border-radius:4px;
+    border:none;
+    font-weight: bold; 
+    text-decoration: none;
+    padding:3px 10px;
+    height: 32px;
+    margin-left: 20px;
+}
+@media screen and (max-width:768px)
+{
+
+    #section_carte{
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding:50px 20px;
+    }
+    #map{
+        height: 400px;
+        width:100%;
+        background-color: grey;
+        margin:auto;
+    }
+    #panneauInfos{
+        width:90%;
+        margin-left: 0;
+        margin-top:20px;
+        display:flex;
+        flex-direction: row;
+        justify-content:space-around;    
+        align-items: flex-start;
+    }
+ 
+    #infosStations{
+
+        border:1px red solid;
+    }
+    #reservation{
+        padding-top: 34px;
+        border:1px blue solid;
+    }
     
 }
 
+/* -------------------- Partie 3 : footer -------------------*/
+
+footer{
+    background-color: #646464;
+    height: 100px;
+    width: 90%;
+    margin:auto;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    color:white;
+    text-align: center;
+
+}

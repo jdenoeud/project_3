@@ -70,11 +70,12 @@ var mapObjet = {
    
          
             document.getElementById("panneauInfos").style.display = "block";
+        
             document.getElementById("nomStation").textContent += String(thisveloMarker.nom_);
             document.getElementById("adresseStation").textContent += String(thisveloMarker.adresse_);
             document.getElementById("placesTotales").textContent += Number(thisveloMarker.places_);
-            
-            document.getElementById("velosDispo").textContent += Number(thisveloMarker.placesLibres_);
+            /*
+            document.getElementById("velosDispo").textContent += Number(thisveloMarker.placesLibres_);*/
            
            
                 

@@ -25,11 +25,17 @@ $(document).ready(function(){
         }
     });
     
+    //Création d'un objet Google map
     var carteVelos = Object.create(mapObjet);
     carteVelos.initMap();
 
+    $("#close").on("click", function(){
+        document.getElementById("panneauInfos").style.display = "none";
+    });
     
+    //création de l'objet Canvas
+    var signature= Object.create(canvasObjet);
+    signature.initCanvas();
  
 });//FIN
     
-

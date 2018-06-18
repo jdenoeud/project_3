@@ -129,18 +129,44 @@
             </div>
             
             <aside id="panneauInfos">
-                <h2>Détails de la station</h2>
-                <h3>Nom de la station</h3>
-                <p id="nomStation"> </p>
-                <h3>Adresse de la station</h3>
-                <p id="adresseStation"></p>
-                <p> <span id="placesTotales"></span> places</p>
-                <p> <span id="velosDispo"></span> vélos disponibles</p>
+                
+                <div id ="infosStations">
+                    <i id="close" class="fa fa-close" ></i>
+                    <h2>Détails de la station</h2>
+                    <h3>Nom de la station</h3>
+                    <p id="nomStation"> </p>
+                    <h3>Adresse</h3>
+                    <p id="adresseStation"></p>
+                    <h3>Vélos disponibles :</h3>
+                    <p id="velosDispo"> </p>
+                    <h3>Places libres :</h3>
+                    <p id="placesLibres"></p>
+                </div>
+                
+                <div id="reservation">
+                    <h4>Signez pour réserver votre vélo :</h4>
+                    <canvas id="canvas" width="250" height="150">
+                        Désolé, votre navigateur ne supporte pas canvas.
+                    </canvas>
+                    <div id="boutons">
+                        <button type="button" id="effacer"> Effacer </button>
+                        <button type="button" id="reserver"> Réserver </button>
+                    </div>
+                </div>
+                              
                 
             </aside>
             
         <!-- Cé API Google map définie pour le projet2: AIzaSyCqX_a1XgAVXUUQLkVnFHfCBS79iBEMvc8-->
         </section>
+        
+            
+        <!--------    Partie 3 - Réservation -------->
+            
+        <footer>
+            <h2 id="suiviResa">Vous n'avez aucune réservation pour l'instant</h2>
+        
+        </footer>
             
           
         </div>
@@ -156,7 +182,7 @@
         
         </script>
         
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqX_a1XgAVXUUQLkVnFHfCBS79iBEMvc8&callback=initMap">
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqX_a1XgAVXUUQLkVnFHfCBS79iBEMvc8&callback=initMap">
         </script>
         
      
@@ -165,7 +191,8 @@
         <script src="../js/markerclusterer.js"></script>
         <script src="../js/ajax.js" ></script>
         <script src="../js/apiJCDecaux.js" ></script>
-        <script src="../js/apiGmap.js" ></script>
+        <script src="../js/apiGmap2.js" ></script>
+        <script src="../js/canvas.js" ></script>
         <script src="../js/main.js" async></script>
        
         
