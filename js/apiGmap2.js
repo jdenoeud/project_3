@@ -19,10 +19,16 @@ var mapObjet = {
     ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=30ba8034c250b5d5247a5f869b0e1b630a263ab4", function(reponse){
         var listeStations = JSON.parse(reponse);
         var markers =[];
+        console.log(listeStations.length);
+        
 
         //Création d'un marker pour chaque station
-        for (i=0 ; i < 100 ; i++){
-                       
+        for (i=0 ; i < 50; i++){
+                    
+            if (listeStations[i].status === "CLOSED"){
+                console.log(listeStations[i]);
+            }
+            
             if ( listeStations[i].available_bikes > 0){
                 var markerImage = "../images/marker_vert.png"
             }
@@ -78,7 +84,6 @@ var mapObjet = {
         var markerCluster = new MarkerClusterer(map, markers, mcOptions);
            
      });//Fin ajaxGet
-         console.log($("#suiviResa"));
          
 }//FIN initMap
 
@@ -90,11 +95,52 @@ function afficherTableau (marker, station){
 
     marker.addListener("click", function(){
         
-        document.getElementById("panneauInfos").style.display = "block";
-        document.getElementById("nomStation").innerHTML = String(station.name).split("-")[1] + " - n° " + String(station.name).split("-")[0] ;
+        $("#panneauInfos").css("display","block");
+         $("#reservation").css("display","none");
+     
+        
+        $("#nomStation").html(String(station.name).split("-")[1] + " - n° " + String(station.name).split("-")[0]);
+        $("#adresseStation").html(String(station.address));
+         $("#placesLibres").html(Number(station.available_bike_stands));
+        
+
+        
+        //Cas où la station est fermée
+  
+        if (station.status=== "OPEN") {
+            $("#stationFermee").css("display","none");
+            $(".infosVelos").css("display","block");
+             //Cas où il n'y a plus de places
+            if (Number(station.available_bikes) === 0){
+                $("#velosDispo").html("Pas de vélos disponibles");
+                $("#velosDispo").css("color","#ed2828");
+
+                $("#reserverVelo").css("display","none");
+                console.log("pas de vélos")
+            }
+            else{
+                $("#velosDispo").html(Number(station.available_bikes));
+                $("#velosDispo").css("color","#646464");
+             
+                $("#reserverVelo").css("display","block");
+            };
+            
+            
+            
+         }
+        else{  
+            $("#stationFermee").css("display","block");
+            $(".infosVelos").css("display","none");
+            $("#reserverVelo").css("display","none");    
+        }
+       
+        
+        
+        
+        /*document.getElementById("nomStation").innerHTML = String(station.name).split("-")[1] + " - n° " + String(station.name).split("-")[0] ;
         document.getElementById("adresseStation").innerHTML = String(station.address);
         document.getElementById("velosDispo").innerHTML = Number(station.available_bikes);
-        document.getElementById("placesLibres").innerHTML = Number(station.available_bike_stands);
+        document.getElementById("placesLibres").innerHTML = Number(station.available_bike_stands);*/
        
 
     });

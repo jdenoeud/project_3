@@ -54,7 +54,7 @@
                 
                    <div id="carousel1" class="slide">
                         <div class="item_image">
-                            <img src="../images/station_velos.jpg"s alt="Station de vélos Vélo'v Lyon"/>
+                            <img src="../images/station_velos.jpg" alt="Station de vélos Vélo'v Lyon"/>
                         </div>
                         
                         <div class="item_texte">
@@ -137,22 +137,29 @@
                     <p id="nomStation"> </p>
                     <h3>Adresse</h3>
                     <p id="adresseStation"></p>
-                    <h3>Vélos disponibles :</h3>
-                    <p id="velosDispo"> </p>
-                    <h3>Places libres :</h3>
-                    <p id="placesLibres"></p>
+                    <h3 class="infosVelos">Vélos disponibles :</h3>
+                    <p id="velosDispo" class="infosVelos"> </p>
+                    <h3 class="infosVelos">Places libres :</h3>
+                    <p id="placesLibres" class="infosVelos"></p>
+                    <p id="stationFermee">Station fermée</p>
+                    <button type="button" id="reserverVelo">Réserver un vélo</button>
+                   
+                    
                 </div>
                 
+                
+                
                 <div id="reservation">
-                    <h4>Signez pour réserver votre vélo :</h4>
-                    <canvas id="canvas" width="250" height="150">
+                      <canvas id="canvas" width="250" height="150">
                         Désolé, votre navigateur ne supporte pas canvas.
                     </canvas>
                     <div id="boutons">
                         <button type="button" id="effacer"> Effacer </button>
-                        <button type="button" id="reserver"> Réserver </button>
+                        <button type="button" id="valider"> Valider la réservation </button>
                     </div>
                 </div>
+                
+                <div id="alerteSignature"></div>
                               
                 
             </aside>
@@ -164,7 +171,11 @@
         <!--------    Partie 3 - Réservation -------->
             
         <footer>
-            <h2 id="suiviResa">Vous n'avez aucune réservation pour l'instant</h2>
+            <p id="aucuneResa">Vous n'avez aucune réservation pour l'instant</p>
+            <div id="infosResa">
+                <p >1 vélo réservé à la station <span id="stationReservee">NOM STATION</span> </p>
+                <p id="suiviResa">La réservation expirera dans <span id="dureeRestante"></span></p>
+            </div>
         
         </footer>
             
@@ -192,6 +203,7 @@
         <script src="../js/ajax.js" ></script>
         <script src="../js/apiJCDecaux.js" ></script>
         <script src="../js/apiGmap2.js" ></script>
+        <script src="../js/webstorage.js" ></script>
         <script src="../js/canvas.js" ></script>
         <script src="../js/main.js" async></script>
        

@@ -338,7 +338,7 @@ header
 /*----------------Partie 2 : Carte Google -------------------*/
 #section_carte{
     padding:50px 20px;
-    padding-bottom: 20px;
+    padding-bottom: 50px;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -417,11 +417,9 @@ header
     display:none;
     font-size: 14px;
     position: relative;
+
 }
-#infosStations{
-  
- 
-}
+
 #panneauInfos h2{
     color:#5BB85D;
     margin-top: 28px;
@@ -439,29 +437,71 @@ header
 #panneauInfos p {
     margin-top: 5px;
 }
+#stationFermee{
+    display: none;
+    color:#ed2828;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+    line-height: 25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 5px;
+    
+}
+#boutonReserverVelo{
+    text-align: center;
+}
+#reserverVelo{
+    background-color: #646464;
+    color:white;
+    border:none;
+    border-radius:4px;
+    font-size:1em;
+    font-weight: bold; 
+    text-decoration: none;
+    padding:3px 20px;
+    height: 32px;
+    margin-bottom: 10px;
+    box-shadow: 4px 4px 10px 2px rgb(100,104,109, 0.3); 
+    margin:auto;
+    margin-top:30px;
+    margin-bottom: 10px;
+}
+#reserverVelo:hover{
+     background-color:#5BB85D;
+}
+
 #reservation{
     display:flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    display:none;
 }
-#reservation h4{
-    margin-top: 0;
-    margin-bottom: 5px;
+#alerteSignature h4{
+    text-align: center;
+    color:#ed2828;
+    font-size:16px;
+    width:80%;
+    line-height: 20px;
+    text-align: center;
+    margin: auto;
 }
 #canvas{
     border:1px #646464 solid;
     margin-bottom: 10px;
     background-color: white;
 }
+
 #boutons{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    margin-top: 
+    justify-content: center;
+
 }
 #effacer{
-    background-color: red;
+    background-color: #ed2828;
     color:white;
     border-radius:4px;
     border:none;
@@ -469,10 +509,10 @@ header
     text-decoration: none;
     padding:3px 10px;
     height: 32px;
-    margin-right: 20px;
+    margin-right: 10px;
 }
-#reserver{
-    background-color: green;
+#valider{
+    background-color: #5BB85D;
     color:white;
     border-radius:4px;
     border:none;
@@ -480,7 +520,7 @@ header
     text-decoration: none;
     padding:3px 10px;
     height: 32px;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 @media screen and (max-width:768px)
 {
@@ -501,33 +541,43 @@ header
         width:90%;
         margin-left: 0;
         margin-top:20px;
-        display:flex;
-        flex-direction: row;
-        justify-content:space-around;    
-        align-items: flex-start;
+        text-align:center;
     }
- 
-    #infosStations{
 
-        border:1px red solid;
-    }
-    #reservation{
-        padding-top: 34px;
-        border:1px blue solid;
-    }
-    
 }
 
 /* -------------------- Partie 3 : footer -------------------*/
 
 footer{
     background-color: #646464;
-    height: 100px;
+   
     width: 90%;
     margin:auto;
     margin-bottom: 30px;
     border-radius: 10px;
     color:white;
     text-align: center;
+    padding-top: 35px;
+    padding-bottom: 35px;
 
+
+}
+footer p{
+    color:white;
+    font-weight: 600;
+    font-size:22px;
+    line-height: 22px;
+    margin-top:0;
+    margin-bottom:0;
+}
+#suiviResa{
+    display: block;
+}
+#stationReservee, #dureeRestante {
+    color:#5BB85D;
+}
+#suiviResa{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
 }

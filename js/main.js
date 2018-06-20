@@ -30,12 +30,16 @@ $(document).ready(function(){
     carteVelos.initMap();
 
     $("#close").on("click", function(){
-        document.getElementById("panneauInfos").style.display = "none";
+        $("#panneauInfos").css("display","none");
+        $("#reservation").css("display","none"); $("#reserverVelo").css("display","block");
     });
     
     //création de l'objet Canvas
     var signature= Object.create(canvasObjet);
     signature.initCanvas();
+    
+    //Etat de la réservation
+    
  
 });//FIN
     
