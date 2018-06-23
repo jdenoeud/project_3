@@ -1,3 +1,4 @@
+console.log("apiGmap2 chargé");
 var mapObjet = {
 
 
@@ -19,22 +20,23 @@ var mapObjet = {
     ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=30ba8034c250b5d5247a5f869b0e1b630a263ab4", function(reponse){
         var listeStations = JSON.parse(reponse);
         var markers =[];
-        console.log(listeStations.length);
         
-
         //Création d'un marker pour chaque station
         for (i=0 ; i < 50; i++){
                     
             if (listeStations[i].status === "CLOSED"){
                 console.log(listeStations[i]);
-            }
-            
-            if ( listeStations[i].available_bikes > 0){
-                var markerImage = "../images/marker_vert.png"
-            }
-            else{
                 var markerImage = "../images/marker_rouge.png"
-            };
+            }
+            else {
+                            
+               if ( listeStations[i].available_bikes > 0){
+                    var markerImage = "../images/marker_vert.png"
+                }
+                else{
+                    var markerImage = "../images/marker_rouge.png"
+                }
+            }
             
             var marker = new google.maps.Marker({
                 position: listeStations[i].position, 
@@ -95,10 +97,17 @@ function afficherTableau (marker, station){
 
     marker.addListener("click", function(){
         
+        //On enregistre le nom de la station dans sessionstorage
+        
+        var stationObjet= Object.create(storageObjet);
+        stationObjet.saveData("nomStation",station.name);
+               
+        //Affichage du paneau d'information
         $("#panneauInfos").css("display","block");
-         $("#reservation").css("display","none");
+        $("#reservation").css("display","none");
      
         
+        //On complète les informations de la station sélectionnée
         $("#nomStation").html(String(station.name).split("-")[1] + " - n° " + String(station.name).split("-")[0]);
         $("#adresseStation").html(String(station.address));
          $("#placesLibres").html(Number(station.available_bike_stands));
@@ -116,7 +125,7 @@ function afficherTableau (marker, station){
                 $("#velosDispo").css("color","#ed2828");
 
                 $("#reserverVelo").css("display","none");
-                console.log("pas de vélos")
+                
             }
             else{
                 $("#velosDispo").html(Number(station.available_bikes));
@@ -124,10 +133,7 @@ function afficherTableau (marker, station){
              
                 $("#reserverVelo").css("display","block");
             };
-            
-            
-            
-         }
+        }
         else{  
             $("#stationFermee").css("display","block");
             $(".infosVelos").css("display","none");

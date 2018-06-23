@@ -33,13 +33,36 @@ $(document).ready(function(){
         $("#panneauInfos").css("display","none");
         $("#reservation").css("display","none"); $("#reserverVelo").css("display","block");
     });
+
     
     //création de l'objet Canvas
     var signature= Object.create(canvasObjet);
-    signature.initCanvas();
+    signature.initCanvas("#canvas");
     
-    //Etat de la réservation
+        
+    //Gestion des boutons de réservation
+    var $reservation = $("#reservation");
+        
+    var $reseverVelo = $("#reserverVelo");
+    $reseverVelo.click(function(){
+        $reservation.css("display","block");
+        $reseverVelo.css("display","none");
+    });
+        
     
- 
+    //Effacer le contenu du canvas
+    var $boutonEffacer = $("#effacer");
+    $boutonEffacer.on("click",function(){
+        signature.effacerCanvas();
+    });
+    
+    //Validation de la réservation
+    var $valider = $("#valider");
+    $valider.click(function(){
+        signature.validerReservation();
+    });
+    
+    
+    
 });//FIN
     
