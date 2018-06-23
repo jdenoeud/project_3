@@ -27,15 +27,7 @@ var sliderObjet = {
             backgroundColor:"#f5f5f5",
             border:"2px #646464 solid",
         });
-        
-        
-       this.div.on("click",".boule", function(){
-  
-            thisSlider.i = $(".boule").index(this);
-            console.log(thisSlider.i);
-           afficher(thisSlider.i,thisSlider.slides,thisSlider.boules);
-        });
-         
+     
         
     },
     
@@ -48,12 +40,8 @@ var sliderObjet = {
         else{
             this.i=0;
         };
-        afficher(this.i,this.slides,this.boules);
     },
-    
-    
-    
-    
+        
     //Fonction diapo précédente
     prev: function(){
         if(this.i > 0){
@@ -62,13 +50,38 @@ var sliderObjet = {
         else{
             this.i=this.nbSlides - 1;
         }
-       afficher(this.i,this.slides,this.boules);
-    }
+    },
+    
+    changerNumBoule: function(elementClique) {
+        this.i = $(".boule").index(elementClique);
+        console.log(this.i);
+    },
+    
+    //Fonction d'affichage des slides
+    afficher: function(){
+        this.slides.animate({
+             opacity:"0",
+         },"fast");
+     
+        this.slides.eq(this.i).animate({
+            opacity:"1",
+        },"fast");
+     
+        this.boules.css({
+            backgroundColor:"#646464",
+            border:"2px #f5f5f5 solid",
+        });
+        this.boules.eq(this.i).css({
+                backgroundColor:"#f5f5f5",
+                border:"2px #646464 solid",
+        });
+    },
+    
     
 }//FIN de l'objet Carousel
 
 
-//Fonction d'affichage des slides
+/*Fonction d'affichage des slides
  function afficher (numero,listeSlides,boules){
    
      listeSlides.animate({
@@ -89,4 +102,4 @@ var sliderObjet = {
             border:"2px #646464 solid",
     });
    
-};
+};*/

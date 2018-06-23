@@ -5,11 +5,21 @@ $(document).ready(function(){
         
     //Création des évènements pour animer le slider en utilisant les méthodes de sliderObject
     $("#flecheDroite").on("click", function(){
-        sliderAccueil.next()
+        sliderAccueil.next();
+        sliderAccueil.afficher();
     });
     $("#flecheGauche").on("click", function(){
-        sliderAccueil.prev()
+        sliderAccueil.prev();
+        sliderAccueil.afficher();
+        
     });
+    
+    $("#accueil_panorama").on("click",".boule", function(){
+        console.log(this);
+        sliderAccueil.changerNumBoule(this);
+        sliderAccueil.afficher();
+    });
+    
         
     $(document).keyup(function(touche){ 
         var appui = touche.which || touche.keyCode; // le code est compatible tous navigateurs grâce à ces deux propriétés
@@ -24,6 +34,7 @@ $(document).ready(function(){
             sliderAccueil.prev()  
         }
     });
+    
     
     //Création d'un objet Google map
     var carteVelos = Object.create(mapObjet);
