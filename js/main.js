@@ -24,14 +24,16 @@ $(document).ready(function(){
     $(document).keyup(function(touche){ 
         var appui = touche.which || touche.keyCode; // le code est compatible tous navigateurs grâce à ces deux propriétés
         if(appui == 39){ //Appui sur flèche DROITE
-            sliderAccueil.next()
+            sliderAccueil.next();
+            sliderAccueil.afficher();
         }
     });
 
     $(document).keyup(function(touche){ 
         var appui = touche.which || touche.keyCode;
         if(appui == 37){ // Appui sur flèche GAUCHE
-            sliderAccueil.prev()  
+            sliderAccueil.prev();
+            sliderAccueil.afficher();
         }
     });
     

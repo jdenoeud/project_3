@@ -1,21 +1,21 @@
-console.log("fichier canvas.js chargé")
+console.log("fichier canvas.js chargé");
 
 var canvasObjet = {
 
-    initCanvas : function(selecteurCanvas){
+    initCanvas : function (selecteurCanvas) {
   
         thisCanvas = this;
         /*this.canvas = document.getElementById("canvas");*/
         this.canvas = $(selecteurCanvas).get(0);
-        if(!this.canvas){
-                alert("Impossible de récupérer le canvas");
-                return;
+        if (!this.canvas) {
+            alert("Impossible de récupérer le canvas");
+            return;
         };
 
         this.context = this.canvas.getContext('2d');
-        if(!this.context){
-                alert("Impossible de récupérer le context du canvas");
-                return;
+        if (!this.context) {
+            alert("Impossible de récupérer le context du canvas");
+            return;
         };
 
         this.context.lineJoin = "round";
@@ -142,10 +142,6 @@ var canvasObjet = {
         
     },//FIN fonction validerReservation
            
-    
-
-        
-
 }//FIN canvasObjet
 
 
