@@ -169,6 +169,7 @@
             <div id="infosResa">
                 <p >1 vélo réservé à la station <span id="stationReservee">NOM STATION</span> </p>
                 <p id="suiviResa">La réservation expirera dans <span id="dureeRestante"></span></p>
+                <button type="button" id="annulerResa"> Annuler la réservation </button>
             </div>
             <div id="alerteDelai"></div>
         </footer>
@@ -176,8 +177,8 @@
           
         </div>
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-           <script type="text/javascript" src="../js/gmaps.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/gmaps.js"></script>
        
         <script>
            $(function(){
@@ -187,8 +188,7 @@
         
         </script>
         
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqX_a1XgAVXUUQLkVnFHfCBS79iBEMvc8&callback=initMap">
-        </script>
+       
         
      
         
@@ -197,9 +197,13 @@
         <script src="../js/ajax.js" ></script>
         <script src="../js/apiJCDecaux.js" ></script>
         <script src="../js/apiGmap2.js" ></script>
+        
         <script src="../js/webstorage.js" ></script>
         <script src="../js/canvas.js" ></script>
-        <script src="../js/main.js" async></script>
+        <script src="../js/main.js" ></script>
+        
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqX_a1XgAVXUUQLkVnFHfCBS79iBEMvc8&callback=mapObjet.initMap">
+        </script>
        
         
   

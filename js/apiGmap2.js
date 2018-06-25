@@ -1,8 +1,8 @@
-console.log("apiGmap2 chargé");
+console.log("apiGmap2.js chargé");
 var mapObjet = {
 
 
-     initMap : function () {
+    initMap : function () {
         // Définition du centre de la carte
     var lyonCentre = {
           lat: 45.753, 

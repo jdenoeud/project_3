@@ -57,7 +57,7 @@ $(document).ready(function(){
     var $reservation = $("#reservation");
         
     var $reseverVelo = $("#reserverVelo");
-    $reseverVelo.click(function(){
+    $reseverVelo.on("click",function(){
         $reservation.css("display","block");
         $reseverVelo.css("display","none");
     });
@@ -71,7 +71,7 @@ $(document).ready(function(){
     
     //Validation de la réservation
     var $valider = $("#valider");
-    $valider.click(function(){
+    $valider.on("click", function(){
         signature.validerReservation();
     });
     

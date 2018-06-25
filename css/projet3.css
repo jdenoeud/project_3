@@ -266,7 +266,7 @@ header
             transform:scale(1.1);
 }
 #carousel{
-    border:1px rgb(100,100,100) solid;
+    border:1px red solid;
     width:100%;
     max-width:950px;
     height: 500px;
@@ -297,8 +297,9 @@ header
 .item_texte{
     width:100%;
     height: 65px;
-    z-index:200;
-    background-color:rgb(255,255,255,0.8);
+    z-index:10;
+    background-color:rgb(255,255,255);
+    opacity:0.8;
     text-align: center;
     position: absolute;
     bottom:0;
@@ -325,7 +326,8 @@ header
 #navSlider{
     position: absolute;
     bottom:10px;
-    left: calc(50% -100px);
+    left: calc(50% - 100px);
+    left : -webkit-calc(50% - 100px);
     z-index:10;
     width: 200px;
     height: 30px;
@@ -342,7 +344,7 @@ header
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    padding-left: 0;
+    padding-left: 0px;
 }
 .boule{
     height: 10px;
@@ -384,6 +386,7 @@ header
 @media screen and (max-width:880px)
 {
     #carousel{
+        border:1px rgb(100,100,100) solid;
         margin-left: 20px;
         margin-right: 20px;
         max-width:550px;
@@ -487,8 +490,7 @@ header
 
 /*----------------Partie 2 : Carte Google -------------------*/
 #section_carte{
-    padding:50px 20px;
-    padding-bottom: 50px;
+    padding:50px 35px;
     display:-webkit-box;
     display:-ms-flexbox;
     display:flex;
@@ -502,6 +504,7 @@ header
     -webkit-box-align: start;
         -ms-flex-align: start;
             align-items: flex-start;
+
 }
 
 #map{
@@ -733,8 +736,7 @@ header
 
 footer{
     background-color: #646464;
-   
-    width: 90%;
+    width: 75%;
     margin:auto;
     margin-bottom: 30px;
     border-radius: 10px;

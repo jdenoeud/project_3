@@ -1,5 +1,3 @@
-console.log("fichier canvas.js chargé");
-
 var canvasObjet = {
 
     initCanvas : function (selecteurCanvas) {
@@ -28,7 +26,7 @@ var canvasObjet = {
         this.signer = false;
         var lastX = 0;
         var lastY = 0;
-        var intervalId;
+        this.intervalId = 0;
 
         function draw(e) {
             if ( isDrawing === false ) {
@@ -40,20 +38,27 @@ var canvasObjet = {
                 thisCanvas.context.moveTo(lastX, lastY);
                 thisCanvas.context.lineTo(e.offsetX, e.offsetY);
                 thisCanvas.context.stroke();
-                [lastX, lastY] = [e.offsetX, e.offsetY];
+                lastX = e.offsetX;
+                lastY = e.offsetY;
+                //[lastX, lastY] = [e.offsetX, e.offsetY];
 
             }
         }
 
         this.canvas.addEventListener('mousedown',function (e) {
             isDrawing = true;
-            [lastX,lastY]= [e.offsetX, e.offsetY];
+            lastX = e.offsetX;
+            lastY = e.offsetY;
             
         });
 
         this.canvas.addEventListener('mousemove', draw);
-        this.canvas.addEventListener('mouseup', () => isDrawing = false);
-        this.canvas.addEventListener('mouseout', () => isDrawing = false);
+        this.canvas.addEventListener('mouseup', function(){ 
+            isDrawing = false;
+        });
+        this.canvas.addEventListener('mouseout', function() { 
+            isDrawing = false;
+        });
         
     },//FIN de initCanvas 
     
@@ -67,9 +72,7 @@ var canvasObjet = {
     
     //Validation de la réservation et décompte temps restant
     validerReservation : function(){
-        console.log("tata");
-        clearInterval(intervalId);
-        
+                
         if (!this.signer){
             $("#reservation").css("display","none");
             var $divAlerte =$("#alerteSignature");
@@ -81,6 +84,7 @@ var canvasObjet = {
             },2000);
         }
         else{
+            clearInterval(this.intervalId);
             //On vide le canvas et on n'affiche plus le canvas
             $("#reservation").css("display","none");
             
@@ -99,7 +103,6 @@ var canvasObjet = {
            //On recupère le nom de la station pour l'afficher   
             var stationObjet = Object.create(storageObjet);
             var stationSelectionnee = stationObjet.getData("nomStation");
-            console.log(stationSelectionnee);
             $("#stationReservee").text(stationSelectionnee.split("-")[1]);
         
             
@@ -108,17 +111,15 @@ var canvasObjet = {
             var dateObjet = Object.create(storageObjet);
             dateObjet.saveData("date",dateResa.getTime());
             var dateDebutResa = dateObjet.getData("date");
-            var intervalId = setInterval(function(){
+            this.intervalId = setInterval(function(){
                 decompter(dateDebutResa)
             },1000);
-            console.log(intervalId);
         };
         
         function decompter(dateDebut){
             var $dureeRestante = $("#dureeRestante");
             var date = new Date();
-            var remainingTimeMs = 120000 - (date.getTime() - dateDebut);
-            console.log("toto");
+            var remainingTimeMs = 240000 - (date.getTime() - dateDebut);
             var remainingTimeDate = new Date();
             remainingTimeDate.setTime(remainingTimeMs);
             if (remainingTimeMs > 0){
@@ -127,7 +128,7 @@ var canvasObjet = {
                 $dureeRestante.text(min + " minutes et " + sec + " secondes");
             }
             else{
-                clearInterval(intervalId);
+                clearInterval(thisCanvas.intervalId);
                 
                 $("#infosResa").css("display","none");
                 var $alerteDelai =$("#alerteDelai");
