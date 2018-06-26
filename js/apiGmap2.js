@@ -25,7 +25,6 @@ var mapObjet = {
         for (i=0 ; i < 50; i++){
                     
             if (listeStations[i].status === "CLOSED"){
-                console.log(listeStations[i]);
                 var markerImage = "../images/marker_rouge.png"
             }
             else {

@@ -67,13 +67,10 @@ var canvasObjet = {
         this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
         this.signer = false;
     },//FIN fonction effacerCanvas
-        
-    
-    
+           
     //Validation de la réservation et décompte temps restant
     validerReservation : function(){
-                
-        if (!this.signer){
+        if (!thisCanvas.signer){
             $("#reservation").css("display","none");
             var $divAlerte =$("#alerteSignature");
             var $alerte = $("<h4>Veuillez signer pour réserver un vélo</h4>");
@@ -84,10 +81,11 @@ var canvasObjet = {
             },2000);
         }
         else{
+            console.log("validerReservation this.intervalId=" +this.intervalId);
             clearInterval(this.intervalId);
+            
             //On vide le canvas et on n'affiche plus le canvas
             $("#reservation").css("display","none");
-            
             this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
             this.signer= false;
             
@@ -98,28 +96,28 @@ var canvasObjet = {
             //Affichage dans le pied de page
             $("#aucuneResa").css("display","none");
             $("#infosResa").css("display","block");
-            
-            
+                        
            //On recupère le nom de la station pour l'afficher   
             var stationObjet = Object.create(storageObjet);
             var stationSelectionnee = stationObjet.getData("nomStation");
             $("#stationReservee").text(stationSelectionnee.split("-")[1]);
-        
-            
+                    
             //Mise en place du compteur
             var dateResa = new Date();
             var dateObjet = Object.create(storageObjet);
             dateObjet.saveData("date",dateResa.getTime());
             var dateDebutResa = dateObjet.getData("date");
             this.intervalId = setInterval(function(){
-                decompter(dateDebutResa)
+                thisCanvas.decompter(dateDebutResa)
             },1000);
         };
-        
-        function decompter(dateDebut){
+    },//FIN fonction validerReservation
+    
+    //Décompte du temps restant
+    decompter : function(dateDebut){
             var $dureeRestante = $("#dureeRestante");
             var date = new Date();
-            var remainingTimeMs = 240000 - (date.getTime() - dateDebut);
+            var remainingTimeMs = 60000 - (date.getTime() - dateDebut);
             var remainingTimeDate = new Date();
             remainingTimeDate.setTime(remainingTimeMs);
             if (remainingTimeMs > 0){
@@ -128,7 +126,7 @@ var canvasObjet = {
                 $dureeRestante.text(min + " minutes et " + sec + " secondes");
             }
             else{
-                clearInterval(thisCanvas.intervalId);
+                clearInterval(this.intervalId);
                 
                 $("#infosResa").css("display","none");
                 var $alerteDelai =$("#alerteDelai");
@@ -138,11 +136,11 @@ var canvasObjet = {
                     $alerteDelai.html(" ");
                     $("#aucuneResa").css("display","block");
                 },2000);
-        }
-    };//FIN function decompter     
-        
-    },//FIN fonction validerReservation
+                //on efface les données en mémoire dans sessionStorage
+                var stockage = Object.create(storageObjet);
+                stockage.deleteData("date");
+                stockage.deleteData("nomStation");
+            }
+    },//FIN function decompter     
            
 }//FIN canvasObjet
-
-

@@ -51,8 +51,7 @@ $(document).ready(function(){
     //création de l'objet Canvas
     var signature= Object.create(canvasObjet);
     signature.initCanvas("#canvas");
-    
-        
+      
     //Gestion des boutons de réservation
     var $reservation = $("#reservation");
         
@@ -62,7 +61,6 @@ $(document).ready(function(){
         $reseverVelo.css("display","none");
     });
         
-    
     //Effacer le contenu du canvas
     var $boutonEffacer = $("#effacer");
     $boutonEffacer.on("click",function(){
@@ -74,6 +72,37 @@ $(document).ready(function(){
     $valider.on("click", function(){
         signature.validerReservation();
     });
+
+    
+    //Récupération des données de webstorage
+    var etatStorage = Object.create(storageObjet);
+    var memoire = etatStorage.initData();
+    if (memoire === false){
+        console.log("memoire = false");
+    }
+    else{
+        console.log("memoire = true");
+        //Affichage des infos de la réservation
+        var valeurStation = etatStorage.getData("nomStation");
+        $("#aucuneResa").css("display","none");
+        $("#infosResa").css("display","block");
+        $("#stationReservee").text(valeurStation.split("-")[1])
+        
+        //Mise en place d'un compteur
+        var miseAJour= Object.create(canvasObjet);
+        miseAJour.initCanvas("#canvas");
+        var dateDebutResa = etatStorage.getData("date");
+        miseAJour.intervalId = setInterval(function(){
+                thisCanvas.decompter(dateDebutResa)
+            },1000);
+        $valider.on("click", function(){
+            clearInterval(miseAJour.intervalId);
+        });
+    };
+    
+
+
+    
     
     
     
