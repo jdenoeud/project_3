@@ -29,12 +29,7 @@ var storageObjet = {
                 console.log("réservation expirée");
                 var memoire = false;
             }
-            /*$("#aucuneResa").css("display","none");
-            $("#infosResa").css("display","block");
-            $("#stationReservee").text(valeurStation.split("-")[1])*/
-           /* var miseAJour= Object.create(canvasObjet);
-            miseAJour.initCanvas("#canvas");
-            miseAJour.validerReservation();*/
+            
             
         };
         return memoire;

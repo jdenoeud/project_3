@@ -1,7 +1,9 @@
+console.log("apiGmap.js chargé");
+
 var mapObjet = {
 
 
-     initMap : function () {
+    initMap : function () {
         // Définition du centre de la carte
     var lyonCentre = {
           lat: 45.753, 
@@ -9,115 +11,161 @@ var mapObjet = {
     
     //Création d'un objet Google map centré sur lyonCentre
     var map = new google.maps.Map(
-        document.getElementById('map'), {
+        $("#map").get(0), {
             zoom: 14, 
             center: lyonCentre});
     
-    
-     var infowindow = new google.maps.InfoWindow({
-        content: ""
-      });
+    $.ajax({
+           url : "https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=30ba8034c250b5d5247a5f869b0e1b630a263ab4",
+           type : 'GET',
+           dataType : 'json',
+           success : function(reponse, statut){
+               
+               var listeStations = reponse;
+               console.log(listeStations);
+                var markers =[];
 
+                //Création d'un marker pour chaque station
+                for (i=0 ; i < 50; i++){
 
-     //Ajout de markers 100% personnalisés
-    var markerPerso;
-    //Création d'un objet overlayView
-    veloMarker.prototype = new google.maps.OverlayView();
-    
-    
-    /** @constructeur */
-    function veloMarker(details, map) {
+                    if (listeStations[i].status === "CLOSED"){
+                        var markerImage = "../images/marker_rouge.png"
+                    }
+                    else {
 
-        this.pos_ = details.position;
-        this.nom_ = details.name;
-        this.adresse_ = details.address;
-        this.places_ = details.bike_stands;
-        this.placesLibres_ = details.available_bikes;
-        this.map_ = map;
-        this.div_ = null;
-        this.setMap(map);
-        this.nbPlacesLibres_ = details.available_bikes;
-       
-      }
+                       if ( listeStations[i].available_bikes > 0){
+                            var markerImage = "../images/marker_vert.png"
+                        }
+                        else{
+                            var markerImage = "../images/marker_rouge.png"
+                        }
+                    }
 
-    
-    veloMarker.prototype.onAdd = function() {
-        var div = document.createElement("div");
-        div.style.borderStyle = "solid";
-        div.classList.add("veloMarker");
-        var thisveloMarker = this;
-        this.div_ = div;
+                    var marker = new google.maps.Marker({
+                        position: listeStations[i].position, 
+                        icon: markerImage,
+                        map: map,
+                        title:String(listeStations[i].name).split("-")[1]
+                    });
+                    markers.push(marker);
+                    afficherTableau(marker,listeStations[i]);
 
-        var p = document.createElement("p"); 
-        if(this.nbPlacesLibres_ > 0)
-            {
-                p.style.backgroundColor ="green"
-            }
-        else{
-                p.style.backgroundColor ="red"
-            }
-        p.textContent = this.nbPlacesLibres_;
-  
-        div.appendChild(p);
-            
-        var panes = this.getPanes();
-        panes.overlayLayer.appendChild(div);
-        panes.overlayMouseTarget.appendChild(div);
-    
-        google.maps.event.addDomListener(div, 'click', function() {
-            console.log(thisveloMarker.nom_ );
-            console.log(thisveloMarker.adresse_ );
-   
-         
-            document.getElementById("panneauInfos").style.display = "block";
+                }//FIN boucle for
+
+                //Personnalisation des markerCluster
+                var clusterStyles = [
+                  {
+                    textColor: 'white',
+                    textSize: 14,
+                    url: '../images/cluster/m1.png',
+                    backgroundPosition : 'center',
+                      backgroundSize: 'cover',
+                    height: 45,
+                    width: 45,
+                  },
+                 {
+                    textColor: 'white',
+                    textSize: 15,
+                    url: '../images/cluster/m1.png',
+                    backgroundPosition:'center',
+                    height: 50,
+                    width: 50,
+                  },
+                 {
+                    textColor: 'white',
+                    textSize: 14,
+                    url: '../images/cluster/m1.png',
+                    backgroundPosition:'center',
+                    height: 50,
+                    width: 50,
+                  }
+                ];
+                var mcOptions = {
+                    gridSize: 50,
+                    styles: clusterStyles,
+                    maxZoom: 15,
+                };
+                //Création d'un objet markerCluster pour regrouper les markers
+                var markerCluster = new MarkerClusterer(map, markers, mcOptions);
+           },//Fin des instructions en cas de succès
+
+           error : function(resultat, statut, erreur){
+               console.log("erreur lors de la récupération des données : "+ erreur);
+           },
+
+           complete : function(resultat, statut){
+
+           }
+
+        });//Fin de la requête ajax
         
-            document.getElementById("nomStation").textContent += String(thisveloMarker.nom_);
-            document.getElementById("adresseStation").textContent += String(thisveloMarker.adresse_);
-            document.getElementById("placesTotales").textContent += Number(thisveloMarker.places_);
-            /*
-            document.getElementById("velosDispo").textContent += Number(thisveloMarker.placesLibres_);*/
-           
-           
-                
-            });
 
-      };
-    
-    veloMarker.prototype.draw = function() {
-
-            var overlayProjection = this.getProjection();
-            var latitude = this.pos_.lat;
-            var longitudinale = this.pos_.lng;
-            var curPosition = new google.maps.LatLng(latitude,longitudinale);
-            var position = overlayProjection.fromLatLngToDivPixel(curPosition);
-            this.div_.style.left = position.x + 'px';
-            this.div_.style.top = position.y + 'px';
-      };
-    
-    veloMarker.prototype.onRemove = function() {
-        this.div_.parentNode.removeChild(this.div_);
-        this.div_ = null;
-      };
-    
     
      //Récupération des données de l'API JCDECAUX    
-    ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=30ba8034c250b5d5247a5f869b0e1b630a263ab4", function(reponse){
-        var listeStations = JSON.parse(reponse);
-        console.log(listeStations[1]);
-                
-         //Création d'un marker pour chaque station
-        for (i=0 ; i < 10 ; i++){
-           /* var coords = listeStations[i].position;*/
-            markerPerso = new veloMarker(listeStations[i],  map);
 
-      
-        }//FIN boucle for
-    
-
-           
-           
-           
-     });//Fin ajaxGet
-},//FIN initMap
+         
+}//FIN initMap
 
 }//FIN mapObjet
+
+
+//Fonction d'affichage du tableau d'information
+function afficherTableau (marker, station){
+
+    marker.addListener("click", function(){
+        
+        //On enregistre le nom de la station dans sessionstorage
+        
+        var stationObjet= Object.create(storageObjet);
+        stationObjet.saveData("nomStation",station.name);
+               
+        //Affichage du paneau d'information
+        $("#panneauInfos").css("display","block");
+        $("#reservation").css("display","none");
+     
+        
+        //On complète les informations de la station sélectionnée
+        $("#nomStation").html(String(station.name).split("-")[1] + " - n° " + String(station.name).split("-")[0]);
+        $("#adresseStation").html(String(station.address));
+         $("#placesLibres").html(Number(station.available_bike_stands));
+        
+
+        
+        //Cas où la station est fermée
+  
+        if (station.status=== "OPEN") {
+            $("#stationFermee").css("display","none");
+            $(".infosVelos").css("display","block");
+             //Cas où il n'y a plus de places
+            if (Number(station.available_bikes) === 0){
+                $("#velosDispo").html("Pas de vélos disponibles");
+                $("#velosDispo").css("color","#ed2828");
+
+                $("#reserverVelo").css("display","none");
+                
+            }
+            else{
+                $("#velosDispo").html(Number(station.available_bikes));
+                $("#velosDispo").css("color","#646464");
+             
+                $("#reserverVelo").css("display","block");
+            };
+        }
+        else{  
+            $("#stationFermee").css("display","block");
+            $(".infosVelos").css("display","none");
+            $("#reserverVelo").css("display","none");    
+        }
+       
+        
+        
+        
+        /*document.getElementById("nomStation").innerHTML = String(station.name).split("-")[1] + " - n° " + String(station.name).split("-")[0] ;
+        document.getElementById("adresseStation").innerHTML = String(station.address);
+        document.getElementById("velosDispo").innerHTML = Number(station.available_bikes);
+        document.getElementById("placesLibres").innerHTML = Number(station.available_bike_stands);*/
+       
+
+    });
+};
+
