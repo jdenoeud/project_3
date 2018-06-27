@@ -1,5 +1,3 @@
-console.log("webstorage OK");
-
 var storageObjet = {
 
     initData : function(){
@@ -13,24 +11,16 @@ var storageObjet = {
         }
         else{
             console.log("1 réservation en mémoire");
-            console.log("date debut resa ="+ valeurDateResa);
             var dateFinResa = Number(valeurDateResa) + Number(60000);
-            console.log("date fin resa ="+ dateFinResa);
-            
             var datePresent = new Date();
             var datePresentMs = datePresent.getTime();
-            console.log("date instant t="+datePresentMs);
             //On vérifie si la réservation a expirée ou non
             if ( dateFinResa > datePresentMs){
-                console.log("reservation encore valide");
                 var memoire = true;
                 }
             else{
-                console.log("réservation expirée");
                 var memoire = false;
-            }
-            
-            
+            }  
         };
         return memoire;
     },

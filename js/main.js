@@ -1,5 +1,6 @@
 $(document).ready(function(){
-    // Instanciation de mon slider de présentation du site
+    
+    // Instanciation du slider
     var sliderAccueil = Object.create(sliderObjet);
     sliderAccueil.init("#accueil_panorama",".slide");
         
@@ -78,10 +79,9 @@ $(document).ready(function(){
     var etatStorage = Object.create(storageObjet);
     var memoire = etatStorage.initData();
     if (memoire === false){
-        console.log("memoire = false");
+
     }
     else{
-        console.log("memoire = true");
         //Affichage des infos de la réservation
         var valeurStation = etatStorage.getData("nomStation");
         $("#aucuneResa").css("display","none");
@@ -99,15 +99,6 @@ $(document).ready(function(){
             clearInterval(miseAJour.intervalId);
         });
     };
-    
-
-    //Test à supprimer
-    var testJcdecaux = Object.create(jcdecauxObjet);
-    testJcdecaux.recupererDonnees();
-
-    
-    
-    
     
 });//FIN
     

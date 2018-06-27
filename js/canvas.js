@@ -43,7 +43,7 @@ var canvasObjet = {
                 //[lastX, lastY] = [e.offsetX, e.offsetY];
 
             }
-        }
+        };
 
         this.canvas.addEventListener('mousedown',function (e) {
             isDrawing = true;
@@ -62,11 +62,13 @@ var canvasObjet = {
         
     },//FIN de initCanvas 
     
+    
     //Pour effacer le contenu du Canvas
     effacerCanvas : function(){
         this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
         this.signer = false;
-    },//FIN fonction effacerCanvas
+    },//FIN effacerCanvas
+    
            
     //Validation de la réservation et décompte temps restant
     validerReservation : function(){
@@ -81,7 +83,6 @@ var canvasObjet = {
             },2000);
         }
         else{
-            console.log("validerReservation this.intervalId=" +this.intervalId);
             clearInterval(this.intervalId);
             
             //On vide le canvas et on n'affiche plus le canvas
@@ -117,7 +118,7 @@ var canvasObjet = {
     decompter : function(dateDebut){
             var $dureeRestante = $("#dureeRestante");
             var date = new Date();
-            var remainingTimeMs = 60000 - (date.getTime() - dateDebut);
+            var remainingTimeMs = 1200000 - (date.getTime() - dateDebut);
             var remainingTimeDate = new Date();
             remainingTimeDate.setTime(remainingTimeMs);
             if (remainingTimeMs > 0){
