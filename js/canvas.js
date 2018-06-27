@@ -111,6 +111,7 @@ var canvasObjet = {
             this.intervalId = setInterval(function(){
                 thisCanvas.decompter(dateDebutResa)
             },1000);
+            console.log("intervalId dans validerResa="+this.intervalId);
         };
     },//FIN fonction validerReservation
     
@@ -118,7 +119,7 @@ var canvasObjet = {
     decompter : function(dateDebut){
             var $dureeRestante = $("#dureeRestante");
             var date = new Date();
-            var remainingTimeMs = 1200000 - (date.getTime() - dateDebut);
+            var remainingTimeMs = 30000 - (date.getTime() - dateDebut);
             var remainingTimeDate = new Date();
             remainingTimeDate.setTime(remainingTimeMs);
             if (remainingTimeMs > 0){
@@ -127,21 +128,28 @@ var canvasObjet = {
                 $dureeRestante.text(min + " minutes et " + sec + " secondes");
             }
             else{
-                clearInterval(this.intervalId);
+                thisCanvas.annulerResa();
                 
-                $("#infosResa").css("display","none");
                 var $alerteDelai =$("#alerteDelai");
                 var $alerteDelaiText = $("<p>Délai écoulé, votre réservation a expiré</p>");
                 $alerteDelaiText.prependTo($alerteDelai);
                 setTimeout(function(){
                     $alerteDelai.html(" ");
                     $("#aucuneResa").css("display","block");
-                },2000);
-                //on efface les données en mémoire dans sessionStorage
-                var stockage = Object.create(storageObjet);
-                stockage.deleteData("date");
-                stockage.deleteData("nomStation");
+                },3000);
+
             }
-    },//FIN function decompter     
+    },//FIN function decompter 
+    
+    //Annuler réservation
+    annulerResa : function(){
+        clearInterval(thisCanvas.intervalId);
+        $("#infosResa").css("display","none");
+    
+        //on efface les données en mémoire dans sessionStorage
+        var stockage = Object.create(storageObjet);
+        stockage.deleteData("date");
+        stockage.deleteData("nomStation");
+    },
            
 }//FIN canvasObjet

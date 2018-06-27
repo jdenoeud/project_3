@@ -11,7 +11,7 @@ var storageObjet = {
         }
         else{
             console.log("1 réservation en mémoire");
-            var dateFinResa = Number(valeurDateResa) + Number(60000);
+            var dateFinResa = Number(valeurDateResa) + Number(1200000);
             var datePresent = new Date();
             var datePresentMs = datePresent.getTime();
             //On vérifie si la réservation a expirée ou non

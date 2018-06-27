@@ -73,6 +73,13 @@ $(document).ready(function(){
     $valider.on("click", function(){
         signature.validerReservation();
     });
+    
+    //Validation de la réservation
+    var $annulerResa = $("#annulerResa");
+    $annulerResa.on("click", function(){
+        signature.annulerResa();
+        $("#aucuneResa").css("display","block");
+    });
 
     
     //Récupération des données de webstorage
@@ -96,6 +103,9 @@ $(document).ready(function(){
                 thisCanvas.decompter(dateDebutResa)
             },1000);
         $valider.on("click", function(){
+            clearInterval(miseAJour.intervalId);
+        });
+        $("#annulerResa").on("click", function(){
             clearInterval(miseAJour.intervalId);
         });
     };
