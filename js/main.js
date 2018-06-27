@@ -100,8 +100,10 @@ $(document).ready(function(){
         });
     };
     
-    //Test à supprimer
 
+    //Test à supprimer
+    var testJcdecaux = Object.create(jcdecauxObjet);
+    testJcdecaux.recupererDonnees();
 
     
     
