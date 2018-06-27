@@ -775,7 +775,7 @@ nav a{
 
 
 
-/* En tête : logo et barre de navigation */
+/*----------------- En tête / navigation----------------*/
 header
 {
     width: 100%;
@@ -827,17 +827,14 @@ header
 }
 #menu li
 {
-    height: 80px;
-
+    height: 40px;
     vertical-align: middle;
-    padding-top:20px;
     padding-left:10px;
     padding-right:10px;
 }
 #menu a
 {
     display: inline-block;
-    height: 40px;
     line-height: 40px;
     border-radius: 4px;
     vertical-align: middle;
@@ -847,10 +844,7 @@ header
     padding-right: 16px;
 }
 
-#navigateur label, #navigateur input{
-    display: none;
-}
-/* Affichage d'un trait bleu lors du focus sur un element du menu de navigation*/
+
 #menu a:focus,#menu a:hover{
     background-color: #5BB85D ;
     color:white;
@@ -866,7 +860,6 @@ header
     header{
         height: 75px;
         width: 100%;
-        position:fixed;
         margin:0;
         padding:0;
     }
@@ -911,18 +904,25 @@ header
     }
     #menu li
     {
-        height: 40px;
+        height: 55px;
         line-height: 40px;
+        padding-left:0;
+        padding-top:0
+
     }
     #menu a
     {
-        line-height: 40px;
-        padding: 0;
-        margin: 0;
-        padding-left: 30px;
-        border-top:none;
+        height: 55px;
+        line-height: 55px;
+        width:100%;
+        border-radius: 0;
+        padding-left: 20px;
+        padding-right: 15px;
     }
-
+    #menu a:focus,#menu a:hover{
+        background-color: #5BB85D ;
+        color:white;
+    }
     #navigateur input[type=checkbox]:checked ~ ul{
         display: block;
     }
@@ -1466,6 +1466,10 @@ footer p{
     padding:3px 10px;
     height: 32px;
     margin-top:15px;
+}
+#annulerResa:hover{
+    -webkit-box-shadow: 4px 4px 10px 2px rgb(255,255,255, 0.3);
+            box-shadow: 4px 4px 10px 2px rgb(255,255,255, 0.3); 
 }
 #alerteDelai p{
     color:#ed2828;

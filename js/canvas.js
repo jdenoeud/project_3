@@ -111,7 +111,6 @@ var canvasObjet = {
             this.intervalId = setInterval(function(){
                 thisCanvas.decompter(dateDebutResa)
             },1000);
-            console.log("intervalId dans validerResa="+this.intervalId);
         };
     },//FIN fonction validerReservation
     
@@ -119,7 +118,7 @@ var canvasObjet = {
     decompter : function(dateDebut){
             var $dureeRestante = $("#dureeRestante");
             var date = new Date();
-            var remainingTimeMs = 30000 - (date.getTime() - dateDebut);
+            var remainingTimeMs = 1200000 - (date.getTime() - dateDebut);
             var remainingTimeDate = new Date();
             remainingTimeDate.setTime(remainingTimeMs);
             if (remainingTimeMs > 0){
