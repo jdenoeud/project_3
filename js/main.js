@@ -50,7 +50,7 @@ $(document).ready(function(){
 
     
     //création de l'objet Canvas
-    
+    resize()
 
     
     function resize() { 
@@ -59,9 +59,10 @@ $(document).ready(function(){
         console.log(largeurCanvas);
         canvas.setAttribute("width", largeurCanvas);
     }
-
-  window.onresize = resize
-
+    resize();
+    
+    window.onresize = resize;
+    
     
 
     
