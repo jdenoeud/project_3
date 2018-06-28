@@ -3,7 +3,13 @@ var canvasObjet = {
     initCanvas : function (selecteurCanvas) {
   
         thisCanvas = this;
-        /*this.canvas = document.getElementById("canvas");*/
+        
+        /*var largeurCanvas = $(selecteurCanvas).width();
+        console.log("largeurCanvas ="+largeurCanvas);
+        
+        $(selecteurCanvas).width(largeurCanvas+"px");
+        console.log("this.canvas.width="+$(selecteurCanvas).width());*/
+        
         this.canvas = $(selecteurCanvas).get(0);
         if (!this.canvas) {
             alert("Impossible de récupérer le canvas");
@@ -20,7 +26,9 @@ var canvasObjet = {
         this.context.lineCap = "round";
         this.context.lineWidth = "1";
         this.context.strokeStyle = "black";
-
+        
+        
+        
         //Evènements et fonctions permettant de signer ds le canvas
         var isDrawing= false;
         this.signer = false;

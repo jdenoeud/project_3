@@ -1,7 +1,7 @@
 var sliderObjet = {
     
     //Fonction d'initialisation d'un carousel
-    init:function(selecteurCarousel, selecteurSlide){
+    init : function(selecteurCarousel, selecteurSlide){
         
         thisSlider=this;
         this.div = $(selecteurCarousel);
@@ -27,9 +27,7 @@ var sliderObjet = {
             backgroundColor:"#f5f5f5",
             border:"2px #646464 solid",
         });
-     
-        
-    },
+    },//FIN init
     
 
     //Fonction diapo suivante
@@ -78,28 +76,4 @@ var sliderObjet = {
     },
     
     
-}//FIN de l'objet Carousel
-
-
-/*Fonction d'affichage des slides
- function afficher (numero,listeSlides,boules){
-   
-     listeSlides.animate({
-         opacity:"0",
-     },"fast");
-     
-     listeSlides.eq(numero).animate({
-         opacity:"1",
-   
-     },"fast");
-     
-    boules.css({
-        backgroundColor:"#646464",
-        border:"2px #f5f5f5 solid",
-    });
-    boules.eq(numero).css({
-            backgroundColor:"#f5f5f5",
-            border:"2px #646464 solid",
-    });
-   
-};*/
+}//FIN de sliderObjet

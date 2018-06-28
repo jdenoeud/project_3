@@ -50,6 +50,13 @@ $(document).ready(function(){
 
     
     //création de l'objet Canvas
+    var $canvas = $("#canvas");
+    var largeurCanvas = $canvas.outerWidth();
+    console.log(largeurCanvas);
+
+    canvas.setAttribute("width", largeurCanvas);
+
+    
     var signature= Object.create(canvasObjet);
     signature.initCanvas("#canvas");
       
