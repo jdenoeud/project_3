@@ -50,11 +50,19 @@ $(document).ready(function(){
 
     
     //création de l'objet Canvas
-    var $canvas = $("#canvas");
-    var largeurCanvas = $canvas.outerWidth();
-    console.log(largeurCanvas);
+    
 
-    canvas.setAttribute("width", largeurCanvas);
+    
+    function resize() { 
+        var $canvas = $("#canvas");
+        var largeurCanvas = $canvas.outerWidth();
+        console.log(largeurCanvas);
+        canvas.setAttribute("width", largeurCanvas);
+    }
+
+  window.onresize = resize
+
+    
 
     
     var signature= Object.create(canvasObjet);
