@@ -9,6 +9,7 @@ $(document).ready(function(){
         sliderAccueil.next();
         sliderAccueil.afficher();
     });
+    
     $("#flecheGauche").on("click", function(){
         sliderAccueil.prev();
         sliderAccueil.afficher();
@@ -16,7 +17,6 @@ $(document).ready(function(){
     });
     
     $("#accueil_panorama").on("click",".boule", function(){
-        console.log(this);
         sliderAccueil.changerNumBoule(this);
         sliderAccueil.afficher();
     });
@@ -49,23 +49,19 @@ $(document).ready(function(){
     });
 
     
+    
     //création de l'objet Canvas
     resize()
-
     
     function resize() { 
         var $canvas = $("#canvas");
         var largeurCanvas = $canvas.outerWidth();
-        console.log(largeurCanvas);
         canvas.setAttribute("width", largeurCanvas);
     }
     resize();
     
     window.onresize = resize;
-    
-    
-
-    
+        
     var signature= Object.create(canvasObjet);
     signature.initCanvas("#canvas");
       

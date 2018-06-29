@@ -4,12 +4,6 @@ var canvasObjet = {
   
         thisCanvas = this;
         
-        /*var largeurCanvas = $(selecteurCanvas).width();
-        console.log("largeurCanvas ="+largeurCanvas);
-        
-        $(selecteurCanvas).width(largeurCanvas+"px");
-        console.log("this.canvas.width="+$(selecteurCanvas).width());*/
-        
         this.canvas = $(selecteurCanvas).get(0);
         if (!this.canvas) {
             alert("Impossible de récupérer le canvas");
@@ -26,9 +20,7 @@ var canvasObjet = {
         this.context.lineCap = "round";
         this.context.lineWidth = "1";
         this.context.strokeStyle = "black";
-        
-        
-        
+           
         //Evènements et fonctions permettant de signer ds le canvas
         var isDrawing= false;
         this.signer = false;
@@ -80,6 +72,7 @@ var canvasObjet = {
            
     //Validation de la réservation et décompte temps restant
     validerReservation : function(){
+        console.log("validerResa this.signer="+ this.signer);
         if (!thisCanvas.signer){
             $("#reservation").css("display","none");
             var $divAlerte =$("#alerteSignature");
@@ -152,6 +145,8 @@ var canvasObjet = {
     annulerResa : function(){
         clearInterval(thisCanvas.intervalId);
         $("#infosResa").css("display","none");
+        thisCanvas.signer= false;
+        console.log("thisCanvas.signer"+thisCanvas.signer);
     
         //on efface les données en mémoire dans sessionStorage
         var stockage = Object.create(storageObjet);

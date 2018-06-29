@@ -6,11 +6,9 @@ var storageObjet = {
         var valeurStation = this.getData("nomStation");
         var valeurDateResa = this.getData("date");
         if ((valeurStation === "null") || (valeurStation === null)){
-            console.log("Pas de réservation en mémoire");
             var memoire = false;
         }
         else{
-            console.log("1 réservation en mémoire");
             var dateFinResa = Number(valeurDateResa) + Number(1200000);
             var datePresent = new Date();
             var datePresentMs = datePresent.getTime();
@@ -41,6 +39,7 @@ var storageObjet = {
         return valeur;
      
     },//FIN de getData
+    
     deleteData : function (cle){
         sessionStorage.setItem(cle, "null");
     },
