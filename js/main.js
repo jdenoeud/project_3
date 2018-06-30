@@ -108,18 +108,8 @@ $(document).ready(function(){
         $("#stationReservee").text(valeurStation.split("-")[1])
         
         //Mise en place d'un compteur
-        var miseAJour= Object.create(canvasObjet);
-        miseAJour.initCanvas("#canvas");
         var dateDebutResa = etatStorage.getData("date");
-        miseAJour.intervalId = setInterval(function(){
-                thisCanvas.decompter(dateDebutResa)
-            },1000);
-        $valider.on("click", function(){
-            clearInterval(miseAJour.intervalId);
-        });
-        $("#annulerResa").on("click", function(){
-            clearInterval(miseAJour.intervalId);
-        });
+        signature.lancerCompteur(dateDebutResa);
     };
     
 });//FIN

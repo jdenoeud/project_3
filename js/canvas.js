@@ -72,7 +72,6 @@ var canvasObjet = {
            
     //Validation de la réservation et décompte temps restant
     validerReservation : function(){
-        console.log("validerResa this.signer="+ this.signer);
         if (!thisCanvas.signer){
             $("#reservation").css("display","none");
             var $divAlerte =$("#alerteSignature");
@@ -109,44 +108,47 @@ var canvasObjet = {
             var dateObjet = Object.create(storageObjet);
             dateObjet.saveData("date",dateResa.getTime());
             var dateDebutResa = dateObjet.getData("date");
-            this.intervalId = setInterval(function(){
-                thisCanvas.decompter(dateDebutResa)
-            },1000);
+            this.lancerCompteur(dateDebutResa);
         };
     },//FIN fonction validerReservation
     
     //Décompte du temps restant
     decompter : function(dateDebut){
-            var $dureeRestante = $("#dureeRestante");
-            var date = new Date();
-            var remainingTimeMs = 1200000 - (date.getTime() - dateDebut);
-            var remainingTimeDate = new Date();
-            remainingTimeDate.setTime(remainingTimeMs);
-            if (remainingTimeMs > 0){
-                var min = remainingTimeDate.getMinutes();
-                var sec = remainingTimeDate.getSeconds();
-                $dureeRestante.text(min + " minutes et " + sec + " secondes");
+        var $dureeRestante = $("#dureeRestante");
+        var date = new Date();
+        var remainingTimeMs = 1200000 - (date.getTime() - dateDebut);
+        var remainingTimeDate = new Date();
+        remainingTimeDate.setTime(remainingTimeMs);
+        if (remainingTimeMs > 0){
+            var min = remainingTimeDate.getMinutes();
+            var sec = remainingTimeDate.getSeconds();
+            $dureeRestante.text(min + " minutes et " + sec + " secondes");
             }
-            else{
-                thisCanvas.annulerResa();
-                
-                var $alerteDelai =$("#alerteDelai");
-                var $alerteDelaiText = $("<p>Délai écoulé, votre réservation a expiré</p>");
-                $alerteDelaiText.prependTo($alerteDelai);
-                setTimeout(function(){
-                    $alerteDelai.html(" ");
-                    $("#aucuneResa").css("display","block");
-                },3000);
+        else{
+            thisCanvas.annulerResa();
+            var $alerteDelai =$("#alerteDelai");
+            var $alerteDelaiText = $("<p>Délai écoulé, votre réservation a expiré</p>");
+            $alerteDelaiText.prependTo($alerteDelai);
+            setTimeout(function(){
+                $alerteDelai.html(" ");
+                $("#aucuneResa").css("display","block");
+            },3000);
 
-            }
+        }
     },//FIN function decompter 
+    
+    //Lancement en utilisant decompter dans setinterval
+    lancerCompteur : function(dateDebut){
+        thisCanvas.intervalId = setInterval(function(){
+            thisCanvas.decompter(dateDebut)
+        },1000);
+    },
     
     //Annuler réservation
     annulerResa : function(){
         clearInterval(thisCanvas.intervalId);
         $("#infosResa").css("display","none");
         thisCanvas.signer= false;
-        console.log("thisCanvas.signer"+thisCanvas.signer);
     
         //on efface les données en mémoire dans sessionStorage
         var stockage = Object.create(storageObjet);

@@ -52,7 +52,6 @@ var sliderObjet = {
     
     changerNumBoule: function(elementClique) {
         this.i = $(".boule").index(elementClique);
-        console.log(this.i);
     },
     
     //Fonction d'affichage des slides

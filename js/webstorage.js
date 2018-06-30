@@ -1,5 +1,26 @@
 var storageObjet = {
-
+    
+    saveData : function(cle,valeur){
+        
+        if(typeof(Storage) !== "undefined") {
+            sessionStorage.setItem(cle, valeur);
+        } 
+        else {
+            console.log("Désole, votre navigateur ne supporte pas WebStorage");
+        }
+    },//FIN de saveData
+    
+    getData : function(cle){
+   
+        var valeur = sessionStorage.getItem(cle);
+        return valeur;
+     
+    },//FIN de getData
+    
+    deleteData : function (cle){
+        sessionStorage.setItem(cle, "null");
+    },
+    
     initData : function(){
 
         //récuperer les données au moment du chargement
@@ -21,27 +42,6 @@ var storageObjet = {
             }  
         };
         return memoire;
-    },
-    
-    saveData : function(cle,valeur){
-        
-        if(typeof(Storage) !== "undefined") {
-            sessionStorage.setItem(cle, valeur);
-        } 
-        else {
-            console.log("Désole, votre navigateur ne supporte pas WebStorage");
-        }
-    },//FIN de saveData
-    
-    getData : function(cle){
-   
-        var valeur = sessionStorage.getItem(cle);
-        return valeur;
-     
-    },//FIN de getData
-    
-    deleteData : function (cle){
-        sessionStorage.setItem(cle, "null");
     },
 
 }//FIN de Storage objet
